@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">What should I eat?</string>
+    <string name="tell_me_what_should_i_eat">Tell me what should I eat?</string>
+    <string name="get_me_a_recipe">Get me a recipe!</string>
+    <string name="search">Search</string>
+    <string name="recipe_book">Recipe Book</string>
+    <string name="search_by_ingredients_comma_separated">Search by Ingredients (comma separated):</string>
+    <string name="enter_ingredients">Enter Ingredients</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+</resources>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "578372210405",
+    "firebase_url": "https://native-app-studio.firebaseio.com",
+    "project_id": "native-app-studio",
+    "storage_bucket": "native-app-studio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578372210405:android:84cb787c96cc9b72",
+        "android_client_info": {
+          "package_name": "com.example.jim.jimboelrijkpset6"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578372210405-em22hknos60ke0l7l3u78amg8pdd11ue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8zw2hcr1bjYGnCZrzlbgFsqKyf3Ed_y0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
