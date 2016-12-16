@@ -44,10 +44,8 @@ public class RecipeDetailActivity extends BaseActivity {
     private DatabaseReference mDatabase;
     private ProgressDialog pDialog;
 
-    private String mRecipeSearch;
     private String mThumbnail;
 
-    private String mUrl = "http://www.recipepuppy.com/api/?q=";
     private String mComplete_Url;
     private String mIngredient;
     private String mRecipe;
@@ -72,10 +70,11 @@ public class RecipeDetailActivity extends BaseActivity {
 
         //Get data from Bundle
         Bundle extras = getIntent().getExtras();
-        mRecipeSearch = extras.getString("Recipe_Search");
-        Log.e(TAG, "entered: " + mRecipeSearch);
+        String recipe_search = extras.getString("Recipe_Search");
+        Log.e(TAG, "entered: " + recipe_search);
 
-        mComplete_Url = mUrl + mRecipeSearch;
+        String url = "http://www.recipepuppy.com/api/?q=";
+        mComplete_Url = url + recipe_search;
 
         // initialize database reference
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -130,7 +129,6 @@ public class RecipeDetailActivity extends BaseActivity {
                                     Toast.LENGTH_LONG)
                                     .show();
                         }
-
                     });
                 }
             } else {
