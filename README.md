@@ -7,6 +7,7 @@ With this application you can lookup recipes by searching for left-over ingredie
 This applications uses Recipe Puppy API which is an ingredient based recipe search machine.
 For more information see: http://www.recipepuppy.com/about/api/
 FireBase is used as a database to store recipes you want to keep.
+If you want to try out this app, you will have to add Firebase to your project, go to Getting Started for more instructions.
 
 Note to Corrector!
 --------------------
