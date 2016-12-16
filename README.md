@@ -6,15 +6,20 @@ Introduction
 With this application you can lookup recipes by searching for left-over ingredients you have at home.
 This applications uses Recipe Puppy API which is an ingredient based recipe search machine.
 For more information see: http://www.recipepuppy.com/
-FireBase is used as a datebase, when building 
+FireBase is used as a database to store recipes you want to keep.
 
+Note to Corrector!
+--------------------
+Due to lack of time, I could not implement everything I wanted. I left what I still wanted to in TODO's in the comments.
+If there is still a possibility to work on it next week I would be more than happy!
+If you have any questions, or if there are other things I could still improve, feel free to contact me on Slack!
 
 Getting Started
 ---------------
 - [Add Firebase to your Android Project](https://firebase.google.com/docs/android/setup).
 - Log in to the [Firebase Console](https://console.firebase.google.com).
 - Go to **Auth** tab and enable **Email/Password** authentication.
-- Run the sample on Android device or emulator.
+- Run the app on Android device or emulator.
 
 Result
 -----------
