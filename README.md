@@ -18,5 +18,6 @@ Getting Started
 
 Result
 -----------
-For more screenshots, see docs.
 <img src="https://github.com/Jimbo994/jimboelrijkpset6/blob/master/docs/SearchActivity.png" height="534" width="300"/>
+
+For more screenshots, see docs.
