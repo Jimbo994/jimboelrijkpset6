@@ -3,10 +3,11 @@ RecipeBuddy for Android
 
 Introduction
 ------------
-With this application you can lookup recipes by searching for left-over ingredients you have at home
+With this application you can lookup recipes by searching for left-over ingredients you have at home.
 This applications uses Recipe Puppy API which is an ingredient based recipe search machine.
 For more information see: http://www.recipepuppy.com/
 FireBase is used as a datebase, when building 
+
 
 Getting Started
 ---------------
@@ -17,3 +18,5 @@ Getting Started
 
 Result
 -----------
+For more screenshots, see docs.
+<img src="jimboelrijkpset6/docs/SearchActivity.png" height="534" width="300"/>
