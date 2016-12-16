@@ -12,7 +12,7 @@ Note to Corrector!
 --------------------
 Due to lack of time, I could not implement everything I wanted. I left what I still wanted to in TODO's in the comments.
 If there is still a possibility to work on it next week I would be more than happy!
-If you have any questions, or if there are other things I could still improve, feel free to contact me on Slack!
+If you have any questions, or if there are other things I could still improve on, feel free to contact me on Slack!
 
 Getting Started
 ---------------
