@@ -3,6 +3,8 @@ package com.example.jim.jimboelrijkpset6;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.jim.jimboelrijkpset6.models.Post;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.FirebaseDatabase;
 
 
@@ -22,8 +25,12 @@ import java.util.List;
 
 public class MyRecipesActivity extends AppCompatActivity {
 
-//    private static final String TAG = "PostListFragment";
+   private static final String TAG = "PostListFragment";
     private DatabaseReference mDatabase;
+//    private FirebaseRecyclerAdapter<Post, PostViewHolder> mAdapter;
+    private RecyclerView mRecycler;
+    private LinearLayoutManager mManager;
+
     FirebaseHelper helper;
     ArrayAdapter<String> mAdapter;
     ListView lv;

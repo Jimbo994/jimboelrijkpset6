@@ -25,7 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/ingredients"/>
+        android:text="hello"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:id="@+id/ingredients"
+        android:paddingBottom="50dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,14 +36,14 @@
         android:layout_gravity="center"
         android:id="@+id/url"
         android:autoLink="web"
+        android:text="Click here to get the full Recipe!"
         android:linksClickable="true"/>
 
     <Button
         android:text="Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginBottom="25dp"
         android:id="@+id/save_click"
         style="@android:style/Widget.Button"

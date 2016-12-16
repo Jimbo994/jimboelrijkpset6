@@ -4,12 +4,20 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.jim.jimboelrijkpset6.Recipe_Search">
+    android:background="@drawable/chef"
+    tools:context="com.example.jim.jimboelrijkpset6.RecipeSearchActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/don_t_know_what_to_eat_don_t_worry_just_enter_some_ingredients_you_have_in_the_fridge_below_and_i_will_find_you_something"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:paddingTop="50dp"
+        android:paddingBottom="120dp"
+        android:id="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="do_search"
-        android:id="@+id/search_request_button" />
+        android:id="@+id/search_request_button"
+        style="@android:style/Widget.Button" />
 
 </LinearLayout>

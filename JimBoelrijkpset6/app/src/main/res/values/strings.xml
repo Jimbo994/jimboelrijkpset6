@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">What should I eat?</string>
+    <string name="app_name">RecipeBuddy</string>
     <string name="tell_me_what_should_i_eat">Tell me what should I eat?</string>
     <string name="get_me_a_recipe">Get me a recipe!</string>
     <string name="search">Search</string>
@@ -10,4 +10,5 @@
     <string name="password">Password</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
+    <string name="don_t_know_what_to_eat_don_t_worry_just_enter_some_ingredients_you_have_in_the_fridge_below_and_i_will_find_you_something">Don\'t know what to eat? Don\'t worry, just enter some ingredients you have in the fridge below, and I will find you something!</string>
 </resources>
