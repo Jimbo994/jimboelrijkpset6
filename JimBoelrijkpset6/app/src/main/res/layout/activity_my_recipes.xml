@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_recipe_book"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jim.jimboelrijkpset6.MyRecipesActivity">
+    tools:context="com.example.jim.jimboelrijkpset6.viewholder.MyRecipesActivity">
 
-
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/messages_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:clipToPadding="false"-->
-        <!--android:padding="5dp"-->
-        <!--android:scrollbars="vertical"-->
-        <!--tools:listitem="@layout/item_post" />-->
     <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/myrecipes">
-    </ListView>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/myrecipes"/>
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/chef2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/white"
+        android:id="@+id/chef2" />
+
+</RelativeLayout>

@@ -5,27 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.jim.jimboelrijkpset6.RecipeDetailActivity">
+    tools:context="com.example.jim.jimboelrijkpset6.viewholder.RecipeDetailActivity">
 
-    <!--<ListView-->
-        <!--android:id="@+id/list"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true" />-->
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:paddingTop="50sp"
+        android:paddingBottom="30dp"
         android:layout_gravity="center"
-        android:id="@+id/image"
-        />
-
+        android:id="@+id/image" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="hello"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:id="@+id/ingredients"
         android:paddingBottom="50dp"/>
@@ -34,13 +29,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:text="@string/click_below_to_see_the_full_recipe"
+        android:paddingBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_gravity="center"
         android:id="@+id/url"
         android:autoLink="web"
-        android:text="Click here to get the full Recipe!"
         android:linksClickable="true"/>
 
     <Button
-        android:text="Save"
+        android:text="@string/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
