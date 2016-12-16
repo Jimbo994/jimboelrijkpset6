@@ -29,26 +29,21 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ *  This Class sets a view that shows all the recipes that were found by the search request from RecipeSearchActivity
+ *  By initializing a ArrayList and calling GetRecipe.
+ *  RecipePuppy API is used to get information. See Readme for more information.
+ * */
 public class RecipesActivity extends AppCompatActivity {
 
     private ProgressDialog pDialog;
     ListView theListView;
     private String TAG = RecipeSearchActivity.class.getSimpleName();
 
-    String URL1 = "http://www.recipepuppy.com/api/?i=";
-    String URL2 = "&p=3";
-    String CompleteURL;
-    String Search;
+    public String url1 = "http://www.recipepuppy.com/api/?i=";
+    private String mCompleteURL;
 
-    ArrayList<String> Recipes;
-
-//    http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3
-
-//    Optional Parameters:
-//    i : comma delimited ingredients
-//    q : normal search query
-//    p : page
-//            format=xml : if you want xml instead of json
+    private ArrayList<String> mRecipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +52,22 @@ public class RecipesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_app_recipe);
 
-        Recipes = new ArrayList<>();
+        mRecipes = new ArrayList<>();
 
+        //Get data from Bundle
         Bundle extras = getIntent().getExtras();
-        Search = extras.getString("Search");
+        String mSearch = extras.getString("Search");
 
-        CompleteURL = URL1 + Search + URL2;
-        Log.e(TAG, "entered: " + Search);
+        mCompleteURL = url1 + mSearch;
+        Log.e(TAG, "entered: " + mSearch);
         new GetRecipe().execute();
-
         }
 
+    /**
+     * This class does a Http request using Http_Helper class and then parses the information that is wanted out of it.
+     * It uses an AsyncTask
+     * */
     private class GetRecipe extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -79,10 +77,14 @@ public class RecipesActivity extends AppCompatActivity {
             pDialog.show();
         }
 
+        /**
+         * Does http-request and parsed JSONobject into strings and adds them to ArrayList
+         * takes care of JSON exceptions.
+         * */
         @Override
         protected Void doInBackground(Void... arg0) {
             Http_Helper helper = new Http_Helper();
-            String jsonStr = helper.makeServiceCall(CompleteURL);
+            String jsonStr = helper.makeServiceCall(mCompleteURL);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 
@@ -93,7 +95,7 @@ public class RecipesActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArr.length(); i++) {
                         JSONObject recipes = jsonArr.getJSONObject(i);
                         String recipe = recipes.getString("title");
-                        Recipes.add(recipe);
+                        mRecipes.add(recipe);
                     }
 
 
@@ -122,18 +124,17 @@ public class RecipesActivity extends AppCompatActivity {
                 });
             }
             return null;
-
-
         }
 
+        // Initializes Arrayadapter and links it to ListView.
+        // Also makes items clickable and sends appropriate string to RecipeDetailActivity class and starts intent.
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(RecipesActivity.this, android.R.layout.simple_list_item_1, Recipes);
-
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(RecipesActivity.this, android.R.layout.simple_list_item_1, mRecipes);
 
             // Get the ListView so we can work with it
             theListView = (ListView) findViewById(R.id.list);
@@ -156,6 +157,7 @@ public class RecipesActivity extends AppCompatActivity {
 
     }
 
+    // Makes menu items clickable
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -178,6 +180,4 @@ public class RecipesActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

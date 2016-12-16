@@ -62,7 +62,7 @@ public class MyRecipesActivity extends BaseActivity {
         return true;
     }
 
-//     Make Menu items clickable and link to their respective views.
+    // Make Menu items clickable and link to their respective views.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

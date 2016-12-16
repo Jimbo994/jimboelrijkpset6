@@ -17,9 +17,12 @@ import android.widget.EditText;
 import com.example.jim.jimboelrijkpset6.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ *  This class sets a view where can be searched for ingredients.
+ *  Text can be entered in a edittext and this class makes string appropriate to send to RecipesActivity intent
+ *  where a search request can be done.
+ * */
 public class RecipeSearchActivity extends AppCompatActivity {
-
-    String search_request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +32,25 @@ public class RecipeSearchActivity extends AppCompatActivity {
         getSupportActionBar().setIcon(R.mipmap.ic_app_recipe);
     }
 
+    // Takes in edittext and processes it to suitable string for next intent and starts next intent.
+    public void do_search(View view) {
+        EditText input = (EditText) findViewById(R.id.search_request);
+        String search_request = input.getText().toString().replaceAll(" ", "");
 
+        if (!(search_request.length() == 0)){
+            Intent search_and_show = new Intent (this, RecipesActivity.class);
+            search_and_show.putExtra("Search", search_request);
+            startActivity(search_and_show);
+        }
+    }
+
+    // Inflates menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
+    // Makes menu items clickable
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -54,18 +69,6 @@ public class RecipeSearchActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void do_search(View view) {
-        EditText input = (EditText) findViewById(R.id.search_request);
-        search_request = input.getText().toString().replaceAll(" ", "");
-
-        if (!(search_request.length() == 0)){
-            Intent search_and_show = new Intent (this, RecipesActivity.class);
-            search_and_show.putExtra("Search", search_request);
-            startActivity(search_and_show);
-        }
-
     }
 }
 

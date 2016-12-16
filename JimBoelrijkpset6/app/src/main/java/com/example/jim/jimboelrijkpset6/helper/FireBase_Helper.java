@@ -26,7 +26,6 @@ public class FireBase_Helper{
     ArrayList<String> myrecipes;
 
     public FireBase_Helper(DatabaseReference db) {
-
         this.db = db;
         myrecipes = new ArrayList<>();
     }

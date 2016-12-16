@@ -38,17 +38,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RecipeDetailActivity extends BaseActivity {
-    String Recipe;
-    String Thumbnail;
-    private String TAG = RecipeSearchActivity.class.getSimpleName();
-    private ProgressDialog pDialog;
-    String URL1 = "http://www.recipepuppy.com/api/?q=";
-    String Complete_URL;
-    String ingredient;
-    String recipe;
-    String source_url;
-    private DatabaseReference mDatabase;
 
+    private static String TAG = RecipeSearchActivity.class.getSimpleName();
+
+    private DatabaseReference mDatabase;
+    private ProgressDialog pDialog;
+
+    private String mRecipeSearch;
+    private String mThumbnail;
+
+    private String mUrl = "http://www.recipepuppy.com/api/?q=";
+    private String mComplete_Url;
+    private String mIngredient;
+    private String mRecipe;
+    private String mSource_url;
+
+
+    /**
+     * This Class shows the details of a recipe that was clicked on in RecipesActivity
+     * It does another HTTP-request to get more information.
+     * In this Activity the Recipe can be saved as well so that it can be seen in MyRecipesActivity.
+     * RecipePuppy API is used to get information. See Readme for more information.
+     * TODO: getRecipe and getCompleteRecipe could be made more general and then moved to a helper class (no more time)
+     * TODO: Save and writeNewPost functions could be added to FireBase_Helper (no more time)
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,65 +70,25 @@ public class RecipeDetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_app_recipe);
 
+        //Get data from Bundle
         Bundle extras = getIntent().getExtras();
-        Recipe = extras.getString("Recipe_Search");
-        Log.e(TAG, "entered: " + Recipe);
+        mRecipeSearch = extras.getString("Recipe_Search");
+        Log.e(TAG, "entered: " + mRecipeSearch);
 
-        Complete_URL = URL1 + Recipe;
+        mComplete_Url = mUrl + mRecipeSearch;
 
-        // [START initialize_database_ref]
+        // initialize database reference
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        // [END initialize_database_ref]
+
 
         new GetCompleteRecipe().execute();
-
-
-    }
-
-    public void save(View view) {
-        final String RecipeName = recipe;
-        final String Image_url = Thumbnail;
-        final String Recipe_source_url = source_url;
-
-        Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
-
-        // [START single_value_read]
-        final String userId = getUid();
-        mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
-                        User user = dataSnapshot.getValue(User.class);
-
-                        // [START_EXCLUDE]
-                        if (user == null) {
-                            // User is null, error out
-                            Log.e(TAG, "User " + userId + " is unexpectedly null");
-                            Toast.makeText(RecipeDetailActivity.this,
-                                    "Error: could not fetch user.",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Write new post
-                            writeNewPost(userId, RecipeName);
-                        }
-
-                        // Finish this Activity, back to the stream
-
-                        // [END_EXCLUDE]
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                    }
-                });
-        // [END single_value_read]
     }
 
 
-
-
+    /**
+     * This class does a Http request using Http_Helper class and then parses the information that is wanted out of it.
+     * It uses an AsyncTask
+     * */
     private class GetCompleteRecipe extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -126,10 +99,14 @@ public class RecipeDetailActivity extends BaseActivity {
             pDialog.show();
         }
 
+        /**
+         * Does http-request and parsed JSONobject into strings.
+         * takes care of JSON exceptions.
+         * */
         @Override
         protected Void doInBackground(Void... arg0) {
             Http_Helper helper = new Http_Helper();
-            String jsonStr = helper.makeServiceCall(Complete_URL);
+            String jsonStr = helper.makeServiceCall(mComplete_Url);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 
@@ -138,11 +115,11 @@ public class RecipeDetailActivity extends BaseActivity {
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     JSONArray jsonArr = jsonObj.getJSONArray("results");
                     JSONObject recipes = jsonArr.getJSONObject(0);
-                    recipe = recipes.getString("title");
-                    Thumbnail = recipes.getString("thumbnail");
-                    ingredient = recipes.getString("ingredients");
-                    source_url = recipes.getString("href");
-                    Log.e(TAG, "String ingredient: " + ingredient);
+                    mRecipe = recipes.getString("title");
+                    mThumbnail = recipes.getString("thumbnail");
+                    mIngredient = recipes.getString("ingredients");
+                    mSource_url = recipes.getString("href");
+                    Log.e(TAG, "String ingredient: " + mIngredient);
 
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -169,39 +146,86 @@ public class RecipeDetailActivity extends BaseActivity {
                 });
             }
             return null;
-
         }
+        //Strings Retrieved from AsyncTask are put into their respective Text and Image Views.
+        // Image is loaded via Url into ImageView with use of Picasso Library
+        // Information about Picasso can be found here: http://square.github.io/picasso/
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if (pDialog.isShowing())
+                pDialog.dismiss();
 
+            TextView ingredients = (TextView) findViewById(R.id.ingredients);
+            ingredients.setText(mIngredient);
 
-    @Override
-    protected void onPostExecute(Void result) {
-        super.onPostExecute(result);
-        if (pDialog.isShowing())
-            pDialog.dismiss();
+            TextView url = (TextView) findViewById(R.id.url);
+            url.setText(mSource_url);
 
-        TextView ingredients = (TextView) findViewById(R.id.ingredients);
-        ingredients.setText(ingredient);
-
-        TextView url = (TextView) findViewById(R.id.url);
-        url.setText(source_url);
-
-        ImageView meal = (ImageView) findViewById(R.id.image);
-        if (Thumbnail.length() != 0) {
-            Picasso.with(getApplicationContext()).load(Thumbnail).into(meal);
-        }
-        else {
-            meal.setImageDrawable(getDrawable(R.drawable.noimagea));
+            ImageView meal = (ImageView) findViewById(R.id.image);
+            if (mThumbnail.length() != 0) {
+                Picasso.with(getApplicationContext()).load(mThumbnail).into(meal);
+            } else {
+                meal.setImageDrawable(getDrawable(R.drawable.noimagea));
+            }
         }
     }
+    // OnClick listener for Save button, This function saves recipe into database using writeNewPost, takes care of exceptions.
+    public void save(View view) {
+        final String RecipeName = mRecipe;
 
-}
 
+        Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
+
+        //Start Database Read
+        final String userId = getUid();
+        mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get user value
+                        User user = dataSnapshot.getValue(User.class);
+
+                        // Check if there is a user logged in or if user can be reached
+                        if (user == null) {
+                            // User is null, error out
+                            Log.e(TAG, "User " + userId + " is unexpectedly null");
+                            Toast.makeText(RecipeDetailActivity.this,
+                                    "Error: could not fetch user.",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Write new post
+                            writeNewPost(userId, RecipeName);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                    }
+                });
+    }
+
+    //Write post to Database using Posts model
+    private void writeNewPost(String userId, String Recipename) {
+        String key = mDatabase.child("posts").push().getKey();
+        Post post = new Post(Recipename);
+        Map<String, Object> postValues = post.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+
+        mDatabase.updateChildren(childUpdates);
+    }
+
+    // Inflate Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    // Make Menu items clickable and send to appropriate Activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -224,23 +248,6 @@ public class RecipeDetailActivity extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-    // [START write_fan_out]
-    private void writeNewPost(String userId, String Recipename) {
-        // Create new post at /user-posts/$userid/$postid and at
-        // /posts/$postid simultaneously
-        String key = mDatabase.child("posts").push().getKey();
-        Post post = new Post(Recipename);
-        Map<String, Object> postValues = post.toMap();
-
-        Map<String, Object> childUpdates = new HashMap<>();
-//        childUpdates.put("/posts/" + key, postValues);
-        childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
-
-        mDatabase.updateChildren(childUpdates);
-    }
-    // [END write_fan_out]
 }
 
 
