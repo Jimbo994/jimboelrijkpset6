@@ -1,17 +1,20 @@
-package com.example.jim.jimboelrijkpset6;
-
 /**
- * Created by Jim on 9-12-2016.
+ * Created by Jim Boelrijk
+ * Student of UvA
+ * Student number: 1045216
+ *
+ * This code was inspired by google tutorial code for FireBase (see URL below)
+ *  https://github.com/firebase/quickstart-android
  */
+package com.example.jim.jimboelrijkpset6.viewholder;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-
 public class BaseActivity extends AppCompatActivity {
-
+    /** Inflates Progressdialog, and dismisses when done.*/
     private ProgressDialog mProgressDialog;
 
     public void showProgressDialog() {
@@ -29,11 +32,9 @@ public class BaseActivity extends AppCompatActivity {
             mProgressDialog.dismiss();
         }
     }
-
+    /** gets User id from FireBase database.*/
     public String getUid() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
-
-
 }
 

@@ -1,4 +1,10 @@
-package com.example.jim.jimboelrijkpset6;
+/**
+ * Created by Jim Boelrijk
+ * Student of UvA
+ * Studentnumber: 10452516
+ * */
+
+package com.example.jim.jimboelrijkpset6.viewholder;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.jim.jimboelrijkpset6.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RecipeSearchActivity extends AppCompatActivity {
@@ -18,6 +25,8 @@ public class RecipeSearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_search);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_app_recipe);
     }
 
 

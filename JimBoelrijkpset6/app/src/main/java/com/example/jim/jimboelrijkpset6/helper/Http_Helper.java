@@ -1,4 +1,12 @@
-package com.example.jim.jimboelrijkpset6;
+/**
+ * Created by Jim Boelrijk
+ * Student at UvA
+ * Student number: 10452516
+ * Inspired by:
+ * http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
+ */
+
+package com.example.jim.jimboelrijkpset6.helper;
 
 import android.util.Log;
 
@@ -13,18 +21,17 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 /**
- * Created by Jim on 7-12-2016.
- * Inspired by:
- * http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
+ * Helper class that retrieves json from an HTTP adress and returns a string of this json.
  */
 
-public class HTTP_HELPER {
-    private static final String TAG = HTTP_HELPER.class.getSimpleName();
+public class Http_Helper {
+    private static final String TAG = Http_Helper.class.getSimpleName();
 
-    public HTTP_HELPER() {
+    public Http_Helper() {
 
     }
 
+    /** Does service call and checks for Exceptions. Returns a String response */
     public String makeServiceCall(String reqUrl){
         String response = null;
         try{
@@ -45,6 +52,8 @@ public class HTTP_HELPER {
         }
         return response;
     }
+    /** Converts Inputstream from makeServiceCall into a string*/
+
     private String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();

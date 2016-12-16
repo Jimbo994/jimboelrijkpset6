@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.newthinktank.menuexamples2.app.MainActivity" >
 
-
     <group android:checkableBehavior="single">
 
         <item android:id="@+id/search"
@@ -24,8 +23,5 @@
             android:title="Log out"
             android:orderInCategory="102"
             android:visible="true" />
-
-
     </group>
-
 </menu>

@@ -10,5 +10,8 @@
     <string name="password">Password</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
-    <string name="don_t_know_what_to_eat_don_t_worry_just_enter_some_ingredients_you_have_in_the_fridge_below_and_i_will_find_you_something">Don\'t know what to eat? Don\'t worry, just enter some ingredients you have in the fridge below, and I will find you something!</string>
+    <string name="explanation">Don\'t know what to eat? Don\'t worry, just enter some ingredients you have in the fridge below, and I will find you something!</string>
+    <string name="click_here_to_get_the_full_recipe">Click here to get the full Recipe!</string>
+    <string name="save">Save</string>
+    <string name="click_below_to_see_the_full_recipe">Click below to see the full Recipe!</string>
 </resources>

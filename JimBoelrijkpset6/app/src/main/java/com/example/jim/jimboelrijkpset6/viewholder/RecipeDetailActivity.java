@@ -1,4 +1,9 @@
-package com.example.jim.jimboelrijkpset6;
+/**
+ * Created by Jim Boelrijk
+ * Student of UvA
+ * Studentnumber: 10452516
+ * */
+package com.example.jim.jimboelrijkpset6.viewholder;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jim.jimboelrijkpset6.helper.Http_Helper;
+import com.example.jim.jimboelrijkpset6.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +54,8 @@ public class RecipeDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_app_recipe);
 
         Bundle extras = getIntent().getExtras();
         Recipe = extras.getString("Recipe_Search");
@@ -88,7 +97,7 @@ public class RecipeDetailActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
-                            writeNewPost(userId, user.username, RecipeName, Image_url, Recipe_source_url);
+                            writeNewPost(userId, RecipeName);
                         }
 
                         // Finish this Activity, back to the stream
@@ -119,7 +128,7 @@ public class RecipeDetailActivity extends BaseActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            HTTP_HELPER helper = new HTTP_HELPER();
+            Http_Helper helper = new Http_Helper();
             String jsonStr = helper.makeServiceCall(Complete_URL);
 
             Log.e(TAG, "Response from url: " + jsonStr);
@@ -218,11 +227,11 @@ public class RecipeDetailActivity extends BaseActivity {
 
 
     // [START write_fan_out]
-    private void writeNewPost(String userId, String username, String Recipename, String image_url, String Source_url) {
+    private void writeNewPost(String userId, String Recipename) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
-        Post post = new Post(userId, username, Recipename, image_url, Source_url);
+        Post post = new Post(Recipename);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

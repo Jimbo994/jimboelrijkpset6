@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.jim.jimboelrijkpset6.SignInActivity">
+    tools:context="com.example.jim.jimboelrijkpset6.viewholder.SignInActivity">
 
     <ImageView
         android:id="@id/icon"
@@ -60,16 +60,16 @@
             android:id="@+id/button_sign_in"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in" />
-
+            android:text="@string/sign_in"
+            style="@android:style/Widget.Button"/>
 
         <Button
             android:id="@+id/button_sign_up"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up" />
+            android:text="@string/sign_up"
+            style="@android:style/Widget.Button"/>
 
     </LinearLayout>
-
 
 </RelativeLayout>

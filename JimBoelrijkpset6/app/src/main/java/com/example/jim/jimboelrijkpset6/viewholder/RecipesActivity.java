@@ -1,5 +1,10 @@
-package com.example.jim.jimboelrijkpset6;
+/**
+ * Created by Jim Boelrijk
+ * Student of UvA
+ * Studentnumber: 10452516
+ * */
 
+package com.example.jim.jimboelrijkpset6.viewholder;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,6 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.jim.jimboelrijkpset6.helper.Http_Helper;
+import com.example.jim.jimboelrijkpset6.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
@@ -47,6 +54,8 @@ public class RecipesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_app_recipe);
 
         Recipes = new ArrayList<>();
 
@@ -72,7 +81,7 @@ public class RecipesActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            HTTP_HELPER helper = new HTTP_HELPER();
+            Http_Helper helper = new Http_Helper();
             String jsonStr = helper.makeServiceCall(CompleteURL);
 
             Log.e(TAG, "Response from url: " + jsonStr);
